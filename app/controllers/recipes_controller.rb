@@ -17,7 +17,7 @@ class RecipesController < ApplicationController
 		@recipe = current_user.recipes.build(recipe_params)
 
 		if @recipe.save
-			redirect_to @recipe, notice: "Successfully created new recipe"
+			redirect_to @recipe, notice: "Successfully created new restaurant"
 		else
 			render 'new'
 		end
@@ -36,7 +36,7 @@ class RecipesController < ApplicationController
 
 	def destroy
 		@recipe.destroy
-		redirect_to root_path, notice: "Successfully deleted recipe"
+		redirect_to root_path, notice: "Successfully deleted restaurant"
 	end
 
 	private
@@ -47,5 +47,7 @@ class RecipesController < ApplicationController
 
 	def find_recipe
 		@recipe = Recipe.find(params[:id])
+		@comments = @recipe.comments.all
+		@comment = @recipe.comments.build
 	end
 end
